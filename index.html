@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Urban Nights Gallery - Sign Up</title>
+</head>
+<body>
+  <h2>Create an Account</h2>
+  <input type="email" id="email" placeholder="Email" />
+  <input type="password" id="password" placeholder="Password" />
+  <button onclick="signUp()">Sign Up</button>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAQNyTCxhEMj2Wc7pVqp1eH1afaRPWUfRA",
+      authDomain: "urbannightsgallery.firebaseapp.com",
+      projectId: "urbannightsgallery",
+      storageBucket: "urbannightsgallery.firebasestorage.app",
+      messagingSenderId: "474254457254",
+      appId: "1:474254457254:web:02e4b632b5f233ada63767",
+      measurementId: "G-FZVWTX04TD"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    window.signUp = function () {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(userCredential => {
+          alert("Sign-up successful!");
+          console.log(userCredential.user);
+        })
+        .catch(error => {
+          alert(error.message);
+        });
+    };
+  </script>
+</body>
+</html>
